@@ -32,6 +32,17 @@ Route::group(['middleware' => ['dujiaoka.boot'],'namespace' => 'Home'], function
     Route::post('search-order-by-email', 'OrderController@searchOrderByEmail');
     // 通过浏览器查询
     Route::post('search-order-by-browser', 'OrderController@searchOrderByBrowser');
+    
+    // 用户认证路由
+    Route::get('login', 'AuthController@showLoginForm')->name('login');
+    Route::post('login', 'AuthController@login');
+    Route::get('register', 'AuthController@showRegistrationForm')->name('register');
+    Route::post('register', 'AuthController@register');
+    Route::post('logout', 'AuthController@logout')->name('logout');
+    
+    // 用户个人资料
+    Route::get('profile', 'AuthController@showProfile')->middleware('auth')->name('profile');
+    Route::post('profile/update', 'AuthController@updateProfile')->middleware('auth')->name('profile.update');
 });
 
 Route::group(['middleware' => ['install.check'],'namespace' => 'Home'], function () {

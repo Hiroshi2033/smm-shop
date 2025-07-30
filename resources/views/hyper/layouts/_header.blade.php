@@ -12,4 +12,14 @@
     <link href="/assets/hyper/css/icons.min.css" rel="stylesheet" type="text/css">
     <link href="/assets/hyper/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style">
     <link href="/assets/hyper/css/hyper.css?v=045256" rel="stylesheet" type="text/css">
+    <style>
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dropdown-menu {
+            min-width: 10rem;
+        }
+    </style>
 </head>
