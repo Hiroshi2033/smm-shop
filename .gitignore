@@ -15,3 +15,5 @@ yarn-error.log
 install.lock
 .env.buck
 /data
+supervisord.log
+supervisord.pid

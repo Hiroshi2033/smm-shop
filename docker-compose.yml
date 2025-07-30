@@ -7,10 +7,8 @@ services:
       - "80:80"
       - "9000:9000"
     volumes:
-      # 增加此行，则将环境信息进行复制到容器，请确保你存在该文件
-      - ./data/.env:/app/.env
-      # 增加此行，避免每次重新创建容器都需要初始化
-      - ./data/install.lock:/app/install.lock
+      # 映射整个项目代码，使得修改代码能够即时生效
+      - .:/app
       # 增加此行，确保将上传的资源映射出来，避免容器重新创建后图片不在了
       - ./data/public/uploads:/app/public/uploads
     environment:
@@ -43,9 +41,9 @@ services:
       - ./data/mysql:/var/lib/mysql
     ports:
       - "13306:3306"
-
+      
   redis:
-    image: redis:6-alpine
+    image: redis:6
     platform: linux/amd64
     container_name: dujiaoka_redis
     restart: always
