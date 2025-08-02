@@ -34,7 +34,7 @@
     @foreach($data as  $index => $group)
     <a href="#group-{{ $group['id'] }}" class="tab-link" data-bs-toggle="tab" aria-expanded="false" role="tab" data-toggle="tab">
         <span class="tab-title">
-            {{ $group['gp_name'] }}
+            {{ $group['display_name'] }}
         </span>
         <div class="img-checkmark">
             <img src="/assets/hyper/images/check.png">
@@ -59,7 +59,7 @@
                         <img class="home-img" src="/assets/hyper/images/loading.gif" data-src="{{ picture_ulr($goods['picture']) }}">
                         <div class="flex">
                             <p class="name">
-                                {{ $goods['gd_name'] }}
+                                {{ $goods['display_name'] }}
                             </p>
                             <div class="price">
                                 {{ __('hyper.global_currency') }}<b>{{ $goods['actual_price'] }}</b>
@@ -86,7 +86,7 @@
                         <img class="home-img" src="/assets/hyper/images/loading.gif" data-src="{{ picture_ulr($goods['picture']) }}">
                         <div class="flex">
                             <p class="name">
-                                {{ $goods['gd_name'] }}
+                                {{ $goods['display_name'] }}
                             </p>
                             <div class="price">
                                 {{ __('hyper.global_currency') }}<b>{{ $goods['actual_price'] }}</b>

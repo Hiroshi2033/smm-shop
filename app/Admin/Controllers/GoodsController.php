@@ -135,26 +135,48 @@ class GoodsController extends AdminController
     {
         return Form::make(new Goods(), function (Form $form) {
             $form->display('id');
-            $form->text('gd_name')->required();
-            $form->text('gd_description')->required();
-            $form->text('gd_keywords')->required();
+            
+            // 基本信息 - 多语言
+            $form->divider('基本信息');
+            $form->text('gd_name', '商品名称(中文)')->required();
+            $form->text('gd_name_en', '商品名称(英文)')->help('英文商品名称，选填');
+            
+            $form->text('gd_description', '商品描述(中文)')->required();
+            $form->text('gd_description_en', '商品描述(英文)')->help('英文商品描述，选填');
+            
+            $form->text('gd_keywords', '商品关键字(中文)')->required();
+            $form->text('gd_keywords_en', '商品关键字(英文)')->help('英文关键字，选填');
+            
             $form->select('group_id')->options(
                 GoodsGroupModel::query()->pluck('gp_name', 'id')
             )->required();
+            
             $form->image('picture')->autoUpload()->uniqueName()->help(admin_trans('goods.helps.picture'));
             $form->radio('type')->options(GoodsModel::getGoodsTypeMap())->default(GoodsModel::AUTOMATIC_DELIVERY)->required();
+            
+            // 价格与库存
+            $form->divider('价格与库存');
             $form->currency('retail_price')->default(0)->help(admin_trans('goods.helps.retail_price'));
             $form->currency('actual_price')->default(0)->required();
             $form->number('in_stock')->help(admin_trans('goods.helps.in_stock'));
             $form->number('sales_volume');
             $form->number('buy_limit_num')->help(admin_trans('goods.helps.buy_limit_num'));
-            $form->editor('buy_prompt');
-            $form->editor('description');
+            $form->number('ord')->default(1)->help(admin_trans('dujiaoka.ord'));
+            $form->switch('is_open')->default(GoodsModel::STATUS_OPEN);
+            
+            // 商品详情 - 多语言
+            $form->divider('商品详情');
+            $form->editor('buy_prompt', '购买提示(中文)');
+            $form->editor('buy_prompt_en', '购买提示(英文)')->help('英文购买提示，选填');
+            
+            $form->editor('description', '商品详细描述(中文)');
+            $form->editor('description_en', '商品详细描述(英文)')->help('英文商品详细描述，选填');
+            
+            // 高级配置
+            $form->divider('高级配置');
             $form->textarea('other_ipu_cnf')->help(admin_trans('goods.helps.other_ipu_cnf'));
             $form->textarea('wholesale_price_cnf')->help(admin_trans('goods.helps.wholesale_price_cnf'));
             $form->textarea('api_hook');
-            $form->number('ord')->default(1)->help(admin_trans('dujiaoka.ord'));
-            $form->switch('is_open')->default(GoodsModel::STATUS_OPEN);
         });
     }
 }

@@ -73,7 +73,7 @@
     </body>
     <script id="cateTpl" type="text/html">
         <div class="cate-box" data-key="<< d.key >>">
-            <p><< d.gp_name >></p>
+                            <p><< d.display_name >></p>
             <div>{{ __('luna.goods_num') }}：<< d.goods.length >></div>
         </div>
     </script>
@@ -84,7 +84,7 @@
             <div class="picture"><img src="{{ picture_ulr('',true) }}<< d.picture >>" alt=""></div>
             <<# }; >>
             <div class="msg">
-                <div class="goods-name"><< d.gd_name >></div>
+                <div class="goods-name"><< d.display_name >></div>
                 <div class="goods-price">
                     ￥<< d.actual_price >>
                         <<# layui.each(d.wholesale_price_arr, function(index, item){ >>

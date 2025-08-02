@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <h3>
                         {{-- 商品名称 --}}
-                        {{ $gd_name }}
+                        {{ $localized_name ?? ($gd_name_en && app()->getLocale() === 'en' ? $gd_name_en : $gd_name) }}
                     </h3>
                 </div>
                 <div class="form-group">
@@ -147,7 +147,7 @@
     <div class="card card-body buy-product">
         {{-- 商品详情 --}}
         <h5 class="card-title">{{ __('hyper.buy_product_desciption') }}</h5>
-        {!! $description !!}
+        {!! (app()->getLocale() === 'en' && !empty($description_en)) ? $description_en : $description !!}
     </div>
 </div>
 <div class="modal fade" id="buy_prompt" tabindex="-1" role="dialog" aria-hidden="true">
@@ -159,7 +159,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                {!! $buy_prompt !!}
+                {!! (app()->getLocale() === 'en' && !empty($buy_prompt_en)) ? $buy_prompt_en : $buy_prompt !!}
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

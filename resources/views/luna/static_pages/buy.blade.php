@@ -62,7 +62,7 @@
                                             class="selected"></path>
                                     </svg>
                                     <span>
-                                        {{ $gd_name }}
+                                        {{ $localized_name ?? ($gd_name_en && app()->getLocale() === 'en' ? $gd_name_en : $gd_name) }}
                                         @if($type == \App\Models\Goods::AUTOMATIC_DELIVERY)
                                             <span
                                                 class="small-tips tips-green">{{ __('goods.fields.automatic_delivery') }}</span>
@@ -287,7 +287,7 @@
                         <span>{{ __('goods.fields.description') }}</span>
                     </div>
                     <div class="intro">
-                        {!! $description !!}
+                        {!! (app()->getLocale() === 'en' && !empty($description_en)) ? $description_en : $description !!}
                     </div>
                 </div>
             </div>
@@ -328,7 +328,7 @@
 
     @include('luna.layouts._footer')
     <div class="buy-prompt" hidden>
-        {!! $buy_prompt !!}
+                    {!! (app()->getLocale() === 'en' && !empty($buy_prompt_en)) ? $buy_prompt_en : $buy_prompt !!}
     </div>
     </body>
     <script>let stock = {{ $in_stock }}, limitNum = {{$buy_limit_num}};</script>

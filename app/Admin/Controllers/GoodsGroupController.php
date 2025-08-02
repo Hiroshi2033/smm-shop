@@ -81,11 +81,17 @@ class GoodsGroupController extends AdminController
     {
         return Form::make(new GoodsGroup(), function (Form $form) {
             $form->display('id');
-            $form->text('gp_name');
+            
+            // 分类名称 - 多语言
+            $form->text('gp_name', '分类名称(中文)')->required();
+            $form->text('gp_name_en', '分类名称(英文)')->help('英文分类名称，选填。例如：Instagram Accounts, Facebook Accounts');
+            
             $form->switch('is_open')->default(GoodsGroupModel::STATUS_OPEN);
             $form->number('ord')->default(1)->help(admin_trans('dujiaoka.ord'));
+            
             $form->display('created_at');
             $form->display('updated_at');
+            
             $form->disableViewButton();
             $form->footer(function ($footer) {
                 // 去掉`查看`checkbox

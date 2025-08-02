@@ -48,8 +48,40 @@ class GoodsService
             ->where('is_open', GoodsGroup::STATUS_OPEN)
             ->orderBy('ord', 'DESC')
             ->get();
-        // 将自动
-        return $goods ? $goods->toArray() : null;
+        
+        if (!$goods) {
+            return null;
+        }
+        
+        // 处理多语言数据
+        $result = $goods->toArray();
+        $currentLocale = app()->getLocale();
+        
+        foreach ($result as &$group) {
+            // 处理分类名称多语言
+            if ($currentLocale === 'en') {
+                $group['display_name'] = !empty($group['gp_name_en']) ? $group['gp_name_en'] : $group['gp_name'];
+            } else {
+                $group['display_name'] = $group['gp_name'];
+            }
+            
+            if (isset($group['goods'])) {
+                foreach ($group['goods'] as &$goodsItem) {
+                    // 根据当前语言设置显示的商品信息
+                    if ($currentLocale === 'en') {
+                        $goodsItem['display_name'] = !empty($goodsItem['gd_name_en']) ? $goodsItem['gd_name_en'] : $goodsItem['gd_name'];
+                        $goodsItem['display_description'] = !empty($goodsItem['gd_description_en']) ? $goodsItem['gd_description_en'] : $goodsItem['gd_description'];
+                        $goodsItem['display_keywords'] = !empty($goodsItem['gd_keywords_en']) ? $goodsItem['gd_keywords_en'] : $goodsItem['gd_keywords'];
+                    } else {
+                        $goodsItem['display_name'] = $goodsItem['gd_name'];
+                        $goodsItem['display_description'] = $goodsItem['gd_description'];
+                        $goodsItem['display_keywords'] = $goodsItem['gd_keywords'];
+                    }
+                }
+            }
+        }
+        
+        return $result;
     }
 
     /**

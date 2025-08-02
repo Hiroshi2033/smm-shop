@@ -48,7 +48,7 @@
                                     </li>
                                     @foreach($data as  $index => $group)
                                         <li class="nav-item">
-                                            <a href="#group-{{ $group['id'] }}" data-bs-toggle="tab" class="btn btn-outline-secondary">{{ $group['gp_name'] }}</a>
+                                            <a href="#group-{{ $group['id'] }}" data-bs-toggle="tab" class="btn btn-outline-secondary">{{ $group['display_name'] }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -83,11 +83,11 @@
                                                         {{ __('goods.fields.manual_processing') }}
                                                     </span>
                                                 @endif
-                                                <img src="{{ picture_ulr($goods['picture']) }}" class="card-img-top" alt="{{ $goods['gd_name'] }}">
+                                                <img src="{{ picture_ulr($goods['picture']) }}" class="card-img-top" alt="{{ $goods['display_name'] }}">
                                                 <div class="card-body">
 
                                                     <h6 class="card-title text-truncate">
-                                                        {{ $goods['gd_name'] }}
+                                                        {{ $goods['display_name'] }}
                                                     </h6>
 
                                                     <button type="button" class="btn btn-sm btn-outline-success">
@@ -132,11 +132,11 @@
                                         {{ __('goods.fields.manual_processing') }}
                                     </span>
                                                 @endif
-                                                <img src="{{ picture_ulr($goods['picture']) }}" class="card-img-top" alt="{{ $goods['gd_name'] }}">
+                                                <img src="{{ picture_ulr($goods['picture']) }}" class="card-img-top" alt="{{ $goods['display_name'] }}">
                                                 <div class="card-body">
 
                                                     <h6 class="card-title text-truncate">
-                                                        {{ $goods['gd_name'] }}
+                                                        {{ $goods['display_name'] }}
                                                     </h6>
 
                                                         <button type="button" class="btn btn-sm btn-outline-success">

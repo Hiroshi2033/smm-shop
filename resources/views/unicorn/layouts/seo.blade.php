@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ isset($page_title) ? $page_title : '' }} | {{ dujiaoka_config_get('title') }}</title>
     <meta name="keywords" content="{{ $gd_keywords }}">
-    <meta name="description" content="{{ $gd_description }}">
+    <meta name="description" content="{{ (app()->getLocale() === 'en' && !empty($gd_description_en)) ? $gd_description_en : $gd_description }}">
     <meta property="og:type" content="article">
     <meta property="og:image" content="{{ $picture }}">
     <meta property="og:title" content="{{ isset($page_title) ? $page_title : '' }}">
-    <meta property="og:description" content="{{ $gd_description }}">    
+    <meta property="og:description" content="{{ (app()->getLocale() === 'en' && !empty($gd_description_en)) ? $gd_description_en : $gd_description }}">    
     <meta property="og:release_date" content="{{ $updated_at }}">
     @if(\request()->getScheme() == "https")
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">

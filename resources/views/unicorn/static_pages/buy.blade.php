@@ -10,7 +10,7 @@
                             <div class="row no-gutters">
                                 <div class="col-md-4">
                                     <img src="{{ picture_ulr($picture) }}"
-                                         class="card-img-top p-5" alt="{{ $gd_name }}">
+                                         class="card-img-top p-5" alt="{{ $localized_name ?? ($gd_name_en && app()->getLocale() === 'en' ? $gd_name_en : $gd_name) }}">
                                     @if($type == \App\Models\Goods::AUTOMATIC_DELIVERY)
                                         <h6><small class="badge bg-success  position-absolute top-0 start-0">
                                                 <i class="ali-icon">&#xe7db;</i>
@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body p-4">
-                                        <h3 class="card-title">{{ $gd_name }}</h3>
+                                        <h3 class="card-title">{{ $localized_name ?? ($gd_name_en && app()->getLocale() === 'en' ? $gd_name_en : $gd_name) }}</h3>
                                         <h6>
                                             <small class="text-muted">{{__('goods.fields.in_stock')}}：{{ $in_stock }}</small>
                                         </h6>
@@ -153,7 +153,7 @@
                                 <h5>{{ __('goods.fields.description') }}</h5>
                             </div>
                             <div class="card-body">
-                                {!! $description !!}
+                                {!! (app()->getLocale() === 'en' && !empty($description_en)) ? $description_en : $description !!}
                             </div>
                         </div>
                     </div>
@@ -172,7 +172,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {!! $buy_prompt !!}
+                    {!! (app()->getLocale() === 'en' && !empty($buy_prompt_en)) ? $buy_prompt_en : $buy_prompt !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('dujiaoka.close') }}</button>
