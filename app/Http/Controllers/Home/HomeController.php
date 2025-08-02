@@ -185,5 +185,29 @@ class HomeController extends BaseController
         }
     }
 
+    /**
+     * 切换语言
+     *
+     * @param Request $request
+     * @param string $locale
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function switchLanguage(Request $request, $locale)
+    {
+        // 验证语言是否支持
+        $supportedLocales = array_keys(config('dujiaoka.language', []));
+        if (!in_array($locale, $supportedLocales)) {
+            return back()->with('error', 'Unsupported language');
+        }
+
+        // 将语言偏好保存到session
+        session(['locale' => $locale]);
+        
+        // 临时设置当前请求的语言
+        app()->setLocale($locale);
+        
+        return back()->with('success', __('dujiaoka.prompt.language_switched'));
+    }
+
 
 }

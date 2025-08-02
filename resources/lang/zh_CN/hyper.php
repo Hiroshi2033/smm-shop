@@ -9,6 +9,10 @@ return [
     'error_error'         => '错误',
     'order_search'        => '查询订单',
     'global_currency'     => '¥',
+    'login'               => '登入',
+    'register'            => '註冊',
+    'profile'             => '個人資料',
+    'logout'              => '登出',
 
     # home.blade.php
 

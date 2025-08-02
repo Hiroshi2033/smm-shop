@@ -35,8 +35,16 @@ class DujiaoBoot
         ) {
             return response()->view($tplPath, ['nowUri' => $nowUri]);
         }
-        // 语言检测
-        $lang = dujiaoka_config_get('language', 'zh_CN');
+        // 语言检测 - 优先从session读取，否则从配置读取
+        $sessionLocale = session('locale');
+        $supportedLocales = array_keys(config('dujiaoka.language', ['zh_CN' => '简体中文']));
+        
+        if ($sessionLocale && in_array($sessionLocale, $supportedLocales)) {
+            $lang = $sessionLocale;
+        } else {
+            $lang = dujiaoka_config_get('language', 'zh_CN');
+        }
+        
         app()->setLocale($lang);
         // 极验
         $geetest = dujiaoka_config_get('is_open_geetest', BaseModel::STATUS_CLOSE);

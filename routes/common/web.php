@@ -33,6 +33,9 @@ Route::group(['middleware' => ['dujiaoka.boot'],'namespace' => 'Home'], function
     // 通过浏览器查询
     Route::post('search-order-by-browser', 'OrderController@searchOrderByBrowser');
     
+    // 语言切换
+    Route::get('switch-language/{locale}', 'HomeController@switchLanguage')->name('switch.language');
+    
     // 用户认证路由
     Route::get('login', 'AuthController@showLoginForm')->name('login');
     Route::post('login', 'AuthController@login');

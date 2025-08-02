@@ -8,6 +8,17 @@
                     <div class="info">{{ dujiaoka_config_get('text_logo') }}</div>
                 </a>
                 <div class="query layui-hide-xs">
+                    <!-- 语言切换 -->
+                    <div style="display: inline-block; margin-right: 20px;">
+                        <select onchange="window.location.href=this.value" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; padding: 5px;">
+                            @foreach(config('dujiaoka.language', []) as $locale => $name)
+                                <option value="{{ route('switch.language', $locale) }}" {{ app()->getLocale() == $locale ? 'selected' : '' }}>
+                                    {{ $name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
                     <a href="{{ url('order-search') }}">
                         <svg t="1602923269232" class="icon" viewBox="0 0 1024 1024" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" p-id="4816" width="20" height="20">
