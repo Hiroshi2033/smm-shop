@@ -50,6 +50,7 @@ return [
     'buy_verify_code'           => '驗證碼',
     'buy_payment_method'        => '支付方式',
     'buy_order_now'             => '提交訂單',
+    'buy_order_info'            => '訂單信息',
     'buy_product_desciption'    => '商品詳情',
     'buy_warning'               => '警告！',
     'buy_purchase_tips'         => '提示',

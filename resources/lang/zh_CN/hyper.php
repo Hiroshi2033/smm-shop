@@ -54,6 +54,7 @@ return [
     'buy_verify_code'           => '验证码',
     'buy_payment_method'        => '支付方式',
     'buy_order_now'             => '提交订单',
+    'buy_order_info'            => '订单信息',
     'buy_product_desciption'    => '商品详情',
     'buy_warning'               => '警告！',
     'buy_purchase_tips'         => '提示',

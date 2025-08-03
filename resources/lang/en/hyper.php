@@ -54,6 +54,7 @@ return [
     'buy_verify_code'           => 'Verification Code',
     'buy_payment_method'        => 'Payment Method',
     'buy_order_now'             => 'Submit Order',
+    'buy_order_info'            => 'Order Information',
     'buy_product_desciption'    => 'Product Description',
     'buy_warning'               => 'Warning!',
     'buy_purchase_tips'         => 'Tips',

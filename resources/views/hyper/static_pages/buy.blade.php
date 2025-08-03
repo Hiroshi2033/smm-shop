@@ -8,30 +8,55 @@
         </div>
     </div>
 </div>
+
+{{-- 产品展示区域 --}}
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-3 col-sm-4 text-center">
+                        <img src="{{ picture_ulr($picture) }}" 
+                             class="img-fluid rounded" 
+                             alt="{{ $localized_name ?? ($gd_name_en && app()->getLocale() === 'en' ? $gd_name_en : $gd_name) }}"
+                             style="max-height: 200px; object-fit: contain;">
+                    </div>
+                    <div class="col-md-9 col-sm-8">
+                        <h2 class="mb-3">{{ $localized_name ?? ($gd_name_en && app()->getLocale() === 'en' ? $gd_name_en : $gd_name) }}</h2>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            @if($type == \App\Models\Goods::AUTOMATIC_DELIVERY)
+                                {{-- 自动发货 --}}
+                                <span class="badge badge-outline-primary">{{ __('hyper.buy_automatic_delivery') }}</span>
+                            @else
+                                {{-- 人工发货 --}}
+                                <span class="badge badge-outline-danger">{{ __('hyper.buy_charge') }}</span>
+                            @endif
+                            {{-- 库存 --}}
+                            <span class="badge badge-outline-primary">{{ __('hyper.buy_in_stock') }}({{ $in_stock }})</span>
+                            @if($buy_limit_num > 0)
+                                <span class="badge badge-outline-dark">{{__('hyper.buy_purchase_restrictions')}}({{ $buy_limit_num }})</span>
+                            @endif
+                        </div>
+                        <div class="h4 text-danger mb-0">
+                            ¥{{ $actual_price }}
+                            @if((int)$retail_price)
+                                <small class="text-muted"><del>¥{{ $retail_price }}</del></small>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="buy-grid">
     <div class="buy-shop hyper-sm-last">
         <div class="card card-body sticky">
             <form id="buy-form" action="{{ url('create-order') }}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <h3>
-                        {{-- 商品名称 --}}
-                        {{ $localized_name ?? ($gd_name_en && app()->getLocale() === 'en' ? $gd_name_en : $gd_name) }}
-                    </h3>
-                </div>
-                <div class="form-group">
-                    @if($type == \App\Models\Goods::AUTOMATIC_DELIVERY)
-                        {{-- 自动发货 --}}
-                        <span class="badge badge-outline-primary">{{ __('hyper.buy_automatic_delivery') }}</span>
-                    @else
-                        {{-- 人工发货 --}}
-                        <span class="badge badge-outline-danger">{{ __('hyper.buy_charge') }}</span>
-                    @endif
-                    {{-- 库存 --}}
-                    <span class="badge badge-outline-primary">{{ __('hyper.buy_in_stock') }}({{ $in_stock }})</span>
-                    @if($buy_limit_num > 0)
-                        <span class="badge badge-outline-dark"> {{__('hyper.buy_purchase_restrictions')}}({{ $buy_limit_num }})</span>
-                    @endif
+                    <h5 class="mb-3">{{ __('hyper.buy_order_info') }}</h5>
                 </div>
                 @if(!empty($wholesale_price_cnf) && is_array($wholesale_price_cnf))
                     <div class="form-group">
@@ -46,15 +71,7 @@
                         </div>
                     </div>
                 @endif
-                <div class="form-group">
-                    <!--<div class="buy-title">{{ __('hyper.buy_price') }}</div>-->
-                    <h3>
-                        {{-- 价格 --}}
-                        <span class="buy-price">{{ __('hyper.global_currency') }} {{ $actual_price }}</span>
-                        {{-- 原价 --}}
-                        <small><del>¥ {{ $retail_price }}</del></small>
-                    </h3>
-                </div>
+
                 <div class="form-group">
                     {{-- 电子邮箱 --}}
                     <div class="buy-title">{{ __('hyper.buy_email') }}</div>
